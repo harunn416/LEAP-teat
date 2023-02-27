@@ -1,127 +1,128 @@
-<!DOCTYPE html>
-<html>
+.header {
+    background-color: #047c48;
+    color: #ffffff;
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+}
 
-<head>
-	<title>LEAP 単語練習サイト</title>
-	<link rel="stylesheet" href="leap.css">
-	<script src="JavaScript/leap.js"></script>
-</head>
+.header-logo {
+    float: left;
+}
 
-<body>
-	<div class="header">
-		<div class="header-logo first">LEAP</div>
-		<div class="header-logo second">test</div>
-		<div class="header-list">
-			<ul>
-				<li>英語→日本語</li>
-				<li>日本語→英語</li>
-				<li>単語検索</li>
-			</ul>
-		</div>
-	</div>
+.first {
+    padding: 5px 5px 5px 50px;
+    font-weight: bold;
+    font-size: 50px;
+    letter-spacing: 10px;
+}
 
-	<div class="main">
-		<div id="tempWord" style="display: none;"></div>
-		<div id="tempSpritWord" style="display: none;"></div>
-		<div class="colmun">
-			<div class="question">
-				<h1 class="question-explamation">
-					単語の問題を10問作成します。(日本語→英語)
-				</h1>
-				
-				<button id="make_button" onclick="make_question()">問題作成</button>
-				<button id="answer_button" onclick="make_answer()">回答を表示</button>
+.second {
+    padding-top: 10px;
+    font-size: 30px;
+    letter-spacing: 5px;
+}
+
+.header li {
+    font-size: 25px;
+    padding: 5px 20px;
+    list-style: none;
+    float: left;
+    
+}
+
+.main {
+    background-color: #c9fde8;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 100px 0px;
+}
+
+.question-explamation {
+    font-size: 30px;
+    padding: 0px;
+}
+
+.range {
+    display: flex;
+    font-size: 20px;
+    margin: 10px;
+}
+
+#rangenum_front, #rangenum_rear {
+    width: 50px;
+    font-size: 20px;
+}
+
+#make_button, #answer_button {
+    font-weight: 500;
+    font-size: 20px;
+    padding: 2px 10px;
+    margin: 10px;
+    color: #ffffff;
+    background-color: #047c48;
+    border-radius: 2vh;
+    box-shadow: 0 4px 2px #035833;
+    transform: translateY(-4px);
+}
+
+.make_button:hover {
+    background-color: #05683d;
+}
+
+.make_button:active {
+    background-color: #035833;
+    box-shadow: 0 0;
+    transform: translateY(0px);
+}
+
+.tablelist {
+    display: flex;
+}
+
+.Qtable{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.Rtable {
+    font-size: 20px;
+    width: auto;
+}
+
+.question_num {
+    text-align: center;
+}
+
+.question_text {
+    font-weight: 100;
+}
+
+.checkbox {
+    transform: scale(2.2);
+    margin: 0 13px 0 13px;
+}
 
 
-				<div class="range">
-					<a>範囲指定:</a>
-					<input type="number" id="rangenum_front">
-					<a>～</a>
-					<input type="number" id="rangenum_rear">
-					<a style="font-size: 15px; margin: auto 0 0 10px;"> ※省略した場合はすべてを参照します</a>
-				</div>
-				<div class="tablelist">
-					<table class="Qtable" border="1">
-						<tr>
-							<th>列番号</th>
-							<th>単語<br>番号</th>
-							<th>日本訳</th>
-							<th>答え</th>
-						</tr>
-						<tr class="question 1">
-							<td class="question_num 1">1</td>
-							<td class="wordNum 1"></td>
-							<td class="question_text 1"></td>
-							<td class="answer 1"></td>
-						</tr>
-						<tr class="question 2">
-							<td class="question_num 2">2</td>
-							<td class="wordNum 2"></td>
-							<td class="question_text 2"></td>
-							<td class="answer 2"></td>
-						</tr>
-						<tr class="question 3">
-							<td class="question_num 3">3</td>
-							<td class="wordNum 3"></td>
-							<td class="question_text 3"></td>
-							<td class="answer 3"></td>
-						</tr>
-						<tr class="question 4">
-							<td class="question_num 4">4</td>
-							<td class="wordNum 4"></td>
-							<td class="question_text 4"></td>
-							<td class="answer 4"></td>
-						</tr>
-						<tr class="question 5">
-							<td class="question_num 5">5</td>
-							<td class="wordNum 5"></td>
-							<td class="question_text 5"></td>
-							<td class="answer 5"></td>
-						</tr>
-						<tr class="question 6">
-							<td class="question_num 6">6</td>
-							<td class="wordNum 6"></td>
-							<td class="question_text 6"></td>
-							<td class="answer 6"></td>
-						</tr>
-						<tr class="question 7">
-							<td class="question_num 7">7</td>
-							<td class="wordNum 7"></td>
-							<td class="question_text 7"></td>
-							<td class="answer 7"></td>
-						</tr>
-						<tr class="question 8">
-							<td class="question_num 8">8</td>
-							<td class="wordNum 8"></td>
-							<td class="question_text 8"></td>
-							<td class="answer 8"></td>
-						</tr>
-						<tr class="question 9">
-							<td class="question_num 9">9</td>
-							<td class="wordNum 9"></td>
-							<td class="question_text 9"></td>
-							<td class="answer 9"></td>
-						</tr>
-						<tr class="question 9">
-							<td class="question_num 0">10</td>
-							<td class="wordNum 0"></td>
-							<td class="question_text 0"></td>
-							<td class="answer 0"></td>
-						</tr>
-					</table>
-				</div>
 
-				<p id="get_value"></p>
-				
-			</div>
-		</div>
-	</div>
+.imput {
+    font-size: 20px;
+}
 
-	<div class="footer">
-		<ul>
-			<a href="https://gamewith.jp/genshin/" target="_blank">お問い合わせはこちら</a>
-		</ul>
-	</div>
-</body>
+.footer {
+    background-color: #047c48;
+    width: 1000px;
+    margin: 0 auto;
+}
 
-</html>
+.footer a {
+    list-style: none;
+    color: #ffffff;
+}
