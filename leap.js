@@ -60,12 +60,14 @@ function make_answer() {
 
             for (let i = 0; i < 10; i++) {
                 document.getElementsByClassName("answer")[i].innerHTML = deta_array[i];
+                document.getElementsByClassName("displayButton")[i].innerHTML = "非表示"
             }
 
             document.getElementById("answer_button").innerHTML = "回答を非表示"
         } else if (document.getElementById("answer_button").innerHTML == "回答を非表示") {
             for (let i = 0; i < 10; i++) {
                 document.getElementsByClassName("answer")[i].innerHTML = "";
+                document.getElementsByClassName("displayButton")[i].innerHTML = "表示"
             }
             document.getElementById("answer_button").innerHTML = "回答を表示";
         }
