@@ -1,13 +1,14 @@
 function make_question() {
-    start()
 
+    //imputから範囲を取り出す
     var rangenum_front = document.getElementById("rangenum_front").value;
     var rangenum_rear = document.getElementById("rangenum_rear").value;
-
+    
+    //範囲が空白の場合、はじめを1、終わりを最後(GAS上で空白"")にする
     if (rangenum_front == "") { rangenum_front = 1 };
     if (rangenum_rear == "") { rangenum_rear == "" };
 
-    const URL = "https://script.google.com/macros/s/AKfycbzCT49_zATikykJ3i-QLU4GACW3utbtBiQi1GpnjJdSTygKLOwfGN83t4pTHcT7CIRz/exec";
+    var URL = "https://script.google.com/macros/s/AKfycbzCT49_zATikykJ3i-QLU4GACW3utbtBiQi1GpnjJdSTygKLOwfGN83t4pTHcT7CIRz/exec";
 
     let SendDATA = {
         "rangenum_front": rangenum_front,
@@ -21,24 +22,27 @@ function make_question() {
     };
     fetch(URL, postparam);
 
-    var deta = document.getElementById("tempWord").innerHTML;
+    //main要素の先頭tempWordにfetchで取得した単語を入れておく
+    var URL = "https://script.google.com/macros/s/AKfycbzCT49_zATikykJ3i-QLU4GACW3utbtBiQi1GpnjJdSTygKLOwfGN83t4pTHcT7CIRz/exec";
 
-    if (deta != "") {
-        let temp_deta_array = deta.split(",")
-
-        let deta_array = []
-        for (var i = 0; i < temp_deta_array.length; i++) {
-            deta_array.push([temp_deta_array[3 * i], temp_deta_array[3 * i + 1], temp_deta_array[3 * i + 2]]);
-        }
-        console.log(deta_array)
-
-        for (let i = 0; i < 10; i++) {
-            document.getElementsByClassName("wordNum")[i].innerHTML = deta_array[i][0];
-            document.getElementsByClassName("question_text")[i].innerHTML = deta_array[i][2];
-        }
-    } else {
-        document.getElementsByClassName("wordNum")[0].innerHTML = "読み込みが完了していません<BR>もう一度お試しください";
-    }
+    fetch(URL)
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            render_text = data.message;
+            console.log(render_text);
+            
+            document.getElementById("tempWord").innerHTML = ""
+            for (let i = 0; i < 10; i++) {
+                document.getElementsByClassName("wordNum")[i].innerHTML = render_text[i][0];
+                document.getElementsByClassName("question_text")[i].innerHTML = render_text[i][2];
+                document.getElementById("tempWord").innerHTML = `${document.getElementById("tempWord").innerHTML + render_text[i][1]},`
+            }
+        })
+        .catch(error => {
+            document.getElementById("wordNum").innerHTML = error;
+        });
 
     for (let i = 0; i < 10; i++) {
         document.getElementsByClassName("answer")[i].innerHTML = "";
@@ -51,16 +55,11 @@ function make_answer() {
 
     if (deta != "") {
         if (document.getElementById("answer_button").innerHTML == "回答を表示") {
-            let temp_deta_array = deta.split(",")
-
-            let deta_array = []
-            for (var i = 0; i < temp_deta_array.length; i++) {
-                deta_array.push([temp_deta_array[3 * i], temp_deta_array[3 * i + 1], temp_deta_array[3 * i + 2]]);
-            }
+            let deta_array = deta.split(",")
             console.log(deta_array)
 
             for (let i = 0; i < 10; i++) {
-                document.getElementsByClassName("answer")[i].innerHTML = deta_array[i][1];
+                document.getElementsByClassName("answer")[i].innerHTML = deta_array[i];
             }
 
             document.getElementById("answer_button").innerHTML = "回答を非表示"
@@ -73,39 +72,4 @@ function make_answer() {
     } else {
         document.getElementsByClassName("answer")[0].innerHTML = "問題を作成してください";
     }
-}
-
-
-function start() {
-    //main要素の先頭tempWordにfetchで取得した単語を入れておく
-    const URL = "https://script.google.com/macros/s/AKfycbzCT49_zATikykJ3i-QLU4GACW3utbtBiQi1GpnjJdSTygKLOwfGN83t4pTHcT7CIRz/exec";
-
-    fetch(URL)
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            render_text = data.message;
-            document.getElementById("tempWord").innerHTML = render_text;
-        })
-        .catch(error => {
-            document.getElementById("tempWord").innerHTML = error;
-        });
-}
-
-function OnPost() {
-
-    const URL = "https://script.google.com/macros/s/AKfycbzCT49_zATikykJ3i-QLU4GACW3utbtBiQi1GpnjJdSTygKLOwfGN83t4pTHcT7CIRz/exec";
-
-    let SendDATA = {
-        "column_1": document.getElementById("column_1").value,
-        "column_2": document.getElementById("column_2").value
-    };
-    let postparam = {
-        "method": "POST",
-        "mode": "no-cors",
-        "Content-Type": "application/x-www-form-urlencoded",
-        "body": JSON.stringify(SendDATA)
-    };
-    fetch(URL, postparam);
 }
