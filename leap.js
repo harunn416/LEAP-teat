@@ -73,3 +73,25 @@ function make_answer() {
         document.getElementsByClassName("answer")[0].innerHTML = "問題を作成してください";
     }
 }
+
+function make_answer_specify(i) {
+    var deta = document.getElementById("tempWord").innerHTML;
+
+    if (deta != "") {
+        if (document.getElementsByClassName("displayButton")[i].innerHTML == "表示") {
+            let deta_array = deta.split(",")
+            console.log(deta_array)
+
+            document.getElementsByClassName("answer")[i].innerHTML = deta_array[i];
+
+            document.getElementsByClassName("displayButton")[i].innerHTML = "非表示"
+        } else if (document.getElementsByClassName("displayButton")[i].innerHTML == "非表示") {
+
+            document.getElementsByClassName("answer")[i].innerHTML = "";
+
+            document.getElementsByClassName("displayButton")[i].innerHTML = "表示";
+        }
+    } else {
+        document.getElementsByClassName("answer")[0].innerHTML = "問題を作成してください";
+    }
+}
