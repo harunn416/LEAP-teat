@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>LEAP 単語練習サイト 英→日</title>
+	<link rel="stylesheet" href="leap.css">
+	<script src="JavaScript/leap E-J.js"></script>
+</head>
+
+<body>
+	<div class="header">
+		<div class="header-logo first">LEAP</div>
+		<div class="header-logo second">test</div>
+		<div class="header-list">
+			<ul>
+				<li><a class="pageLink" href="LEAP J-E.html" target="_blank">日本語→英語</a></li>
+				<li><a class="pageLink">英語→日本語</a></li>
+				<li><a class="pageLink" href="LEAP words.html" target="_blank">単語一覧</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="main">
+		<div id="tempWord" style="display: none;"></div>
+		<div id="tempSpritWord" style="display: none;"></div>
+		<div class="colmun">
+			<div class="question">
+				<h1 class="question-explamation">
+					単語の問題を10問作成します。(日本語→英語)
+				</h1>
+				
+				<button class="button" id="make_button" onclick="make_question()">問題作成</button>
+				<button class="button" id="answer_button" onclick="make_answer()">回答を表示</button>
+
+
+				<div class="range">
+					<a>範囲指定:</a>
+					<input type="number" id="rangenum_front">
+					<a>～</a>
+					<input type="number" id="rangenum_rear">
+					<a style="font-size: 15px; margin: auto 0 0 10px;"> ※省略した場合はすべてを参照します</a>
+				</div>
+				<p style="font-size: 20px; margin: 0 0 5px 10px; color: #d83a1e;">※問題取得のラグの影響ですぐに問題が表示されません。連打しないでください</p>
+
+				<div class="tablelist">
+					<table class="Qtable" border="1">
+						<tr>
+							<th>列番号</th>
+							<th>単語<br>番号</th>
+							<th>英単語</th>
+							<th>回答<br>表示</th>
+							<th>答え</th>
+						</tr>
+						<tr class="question 1">
+							<td class="question_num 1">1</td>
+							<td class="wordNum 1"></td>
+							<td class="question_text 1"></td>
+							<td><button class="displayButton" onclick="make_answer_specify(0)">表示</button></td>
+							<td class="answer 1"></td>
+						</tr>
+						<tr class="question 2">
+							<td class="question_num 2">2</td>
+							<td class="wordNum 2"></td>
+							<td class="question_text 2"></td>
+							<td><button class="displayButton" onclick="make_answer_specify(1)">表示</button></td>
+							<td class="answer 2"></td>
+						</tr>
+						<tr class="question 3">
+							<td class="question_num 3">3</td>
+							<td class="wordNum 3"></td>
+							<td class="question_text 3"></td>
+							<td><button class="displayButton" onclick="make_answer_specify(2)">表示</button></td>
+							<td class="answer 3"></td>
+						</tr>
+						<tr class="question 4">
+							<td class="question_num 4">4</td>
+							<td class="wordNum 4"></td>
+							<td class="question_text 4"></td>
+							<td><button class="displayButton" onclick="make_answer_specify(3)">表示</button></td>
+							<td class="answer 4"></td>
+						</tr>
+						<tr class="question 5">
+							<td class="question_num 5">5</td>
+							<td class="wordNum 5"></td>
+							<td class="question_text 5"></td>
+							<td><button class="displayButton" onclick="make_answer_specify(4)">表示</button></td>
+							<td class="answer 5"></td>
+						</tr>
+						<tr class="question 6">
+							<td class="question_num 6">6</td>
+							<td class="wordNum 6"></td>
+							<td class="question_text 6"></td>
+							<td><button class="displayButton" onclick="make_answer_specify(5)">表示</button></td>
+							<td class="answer 6"></td>
+						</tr>
+						<tr class="question 7">
+							<td class="question_num 7">7</td>
+							<td class="wordNum 7"></td>
+							<td class="question_text 7"></td>
+							<td><button class="displayButton" onclick="make_answer_specify(6)">表示</button></td>
+							<td class="answer 7"></td>
+						</tr>
+						<tr class="question 8">
+							<td class="question_num 8">8</td>
+							<td class="wordNum 8"></td>
+							<td class="question_text 8"></td>
+							<td><button class="displayButton" onclick="make_answer_specify(7)">表示</button></td>
+							<td class="answer 8"></td>
+						</tr>
+						<tr class="question 9">
+							<td class="question_num 9">9</td>
+							<td class="wordNum 9"></td>
+							<td class="question_text 9"></td>
+							<td><button class="displayButton" onclick="make_answer_specify(8)">表示</button></td>
+							<td class="answer 9"></td>
+						</tr>
+						<tr class="question 9">
+							<td class="question_num 0">10</td>
+							<td class="wordNum 0"></td>
+							<td class="question_text 0"></td>
+							<td><button class="displayButton" onclick="make_answer_specify(9)">表示</button></td>
+							<td class="answer 0"></td>
+						</tr>
+					</table>
+				</div>
+
+				<p id="get_value"></p>
+				
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">
+		<ul>
+			<a href="https://gamewith.jp/genshin/" target="_blank">お問い合わせはこちら</a>
+		</ul>
+	</div>
+</body>
+
+</html>
