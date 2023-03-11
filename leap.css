@@ -1,7 +1,7 @@
 .header {
     background-color: #047c48;
     color: #ffffff;
-    width: 1000px;
+    width: 900px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -15,11 +15,6 @@
 
 .header-logo {
     float: left;
-}
-
-.pageLink {
-    text-decoration: none;
-    color: #ffffff;
 }
 
 .first {
@@ -37,15 +32,23 @@
 
 .header li {
     font-size: 25px;
-    padding: 5px 20px;
     list-style: none;
     float: left;
-    
+}
+
+.pageLink_button {
+    font-size: 25px;
+    text-decoration: none;
+    border: 0px;
+    background-color: #047c48;
+    padding: 20px 10px 10px 10px;
+    margin: 0px ;
+    color: #ffffff;
 }
 
 .main {
     background-color: #c9fde8;
-    width: 1000px;
+    width: 900px;
     margin: 0 auto;
     padding: 100px 0px;
 }
@@ -61,8 +64,8 @@
     margin: 10px;
 }
 
-#rangenum_front, #rangenum_rear {
-    width: 50px;
+#J-E_rangenum_front, #J-E_rangenum_rear, #E-J_rangenum_front, #E-J_rangenum_rear {
+    width: 80px;
     font-size: 20px;
 }
 
@@ -81,7 +84,7 @@
 .displayButton {
     font-weight: 500;
     font-size: 15px;
-    padding: 0px 5px;
+    padding: 0px 8px;
     margin: 5px 1px 1px 1px;
     color: #ffffff;
     background-color: #047c48;
@@ -135,7 +138,7 @@
 
 .footer {
     background-color: #047c48;
-    width: 1000px;
+    width: 900px;
     margin: 0 auto;
 }
 
