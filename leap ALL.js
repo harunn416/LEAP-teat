@@ -62,6 +62,7 @@ function make_question_EJ() {
 
         for (let i = 0; i < 10; i++) {
             setpage.getElementsByClassName("answer")[i].innerHTML = "";
+            setpage.getElementsByClassName("displayButton")[i].innerHTML = "<nobr>表示</nobr>"
         }
         document.getElementById(base+"_answer_button").innerHTML = "回答を表示"
     }
@@ -181,6 +182,7 @@ function make_question_JE() {
 
         for (let i = 0; i < 10; i++) {
             setpage.getElementsByClassName("answer")[i].innerHTML = "";
+            setpage.getElementsByClassName("displayButton")[i].innerHTML = "<nobr>表示</nobr>"
         }
         document.getElementById(base+"_answer_button").innerHTML = "回答を表示"
     }
