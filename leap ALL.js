@@ -1,9 +1,10 @@
 function change_page(page_name) {
     for(var i=0; i<3; i++){
-        document.getElementsByClassName("main")[i].style.display = "none"
+        document.getElementsByClassName("main")[i].style.display = "none";
     }
 
-    document.getElementById(page_name).style.display = ""
+    document.getElementById(page_name).style.display = "";
+    document.getElementById("setpage").innerHTML = page_name;
 }
 
 function make_question_EJ() {
@@ -226,12 +227,8 @@ function make_answer_specify_JE(i) {
     var setpage = document.getElementById(base);
 
     var deta = document.getElementById("tempWord_JE").innerHTML;
-    console.log(deta);
     if (deta != "") {
-        console.log("実行if");
-        console.log(setpage.getElementsByClassName("displayButton")[i].innerHTML);
         if (setpage.getElementsByClassName("displayButton")[i].innerHTML == "<nobr>表示</nobr>") {
-            console.log("実行ifif");
             let deta_array = deta.split(",")
             console.log(deta_array)
 
@@ -239,15 +236,46 @@ function make_answer_specify_JE(i) {
 
             setpage.getElementsByClassName("displayButton")[i].innerHTML = "<nobr>非表示</nobr>"
         } else if (setpage.getElementsByClassName("displayButton")[i].innerHTML == "<nobr>非表示</nobr>") {
-            console.log("実行ifelseif");
             setpage.getElementsByClassName("answer")[i].innerHTML = "";
 
             setpage.getElementsByClassName("displayButton")[i].innerHTML = "<nobr>表示</nobr>";
         }else{
-            console.log("実行ifelse");
         }
     } else {
-        console.log("実行else");
         setpage.getElementsByClassName("answer")[0].innerHTML = "問題を作成してください";
     }
+}
+    
+document.addEventListener('keypress', keypress_ivent);
+function keypress_ivent(e) {
+    //現在開いているページ名を取得
+    var setpage = document.getElementById("setpage").innerHTML;
+
+    if(e.key === '1' || e.key === '2' || e.key === '3' || e.key === '4' || e.key === '5' 
+    || e.key === '6' || e.key === '7' || e.key === '8' || e.key === '9'){
+        if(setpage == "E-J"){
+            make_answer_specify_EJ(e.key-1);
+        }else if(setpage == "J-E"){
+            make_answer_specify_JE(e.key-1);
+        }
+    }else if(e.key === '0'){
+        if(setpage == "E-J"){
+            make_answer_specify_EJ(9);
+        }else if(setpage == "J-E"){
+            make_answer_specify_JE(9);
+        }
+    }else if(e.key === 'a' || e.key === 'A'){
+        if(setpage == "E-J"){
+            make_answer_EJ();
+        }else if(setpage == "J-E"){
+            make_answer_JE();
+        }
+    }else if(e.key === 'M' || e.key === 'm'){
+        if(setpage == "E-J"){
+            make_question_EJ();
+        }else if(setpage == "J-E"){
+            make_question_JE();
+        }
+    }
+    return false; 
 }
