@@ -11,6 +11,7 @@
     transform: translateX(-50%);
     -webkit-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
+    z-index: 1000;
 }
 
 .header-logo {
@@ -50,7 +51,7 @@
     background-color: #c9fde8;
     width: 900px;
     margin: 0 auto;
-    padding: 100px 0px;
+    padding: 100px 0px 5px 0px;
 }
 
 .question-explamation {
