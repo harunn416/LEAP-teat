@@ -27,7 +27,7 @@ function make_question_EJ() {
     //minがmaxより大きかったらエラー表示
     if(rangenum_front > rangenum_rear){
         alert("エラー\n範囲は「範囲の最小値」～「範囲の最大値」で入力してください")
-    }else if(rangenum_rear-rangenum_front<9){
+    }else if(rangenum_rear-rangenum_front<10){
         alert("エラー\n範囲の大きさは10以上を指定してください")
     }else{
         /** 重複チェック用配列 */
@@ -49,9 +49,11 @@ function make_question_EJ() {
         console.log(randoms);
 
         //配列内の値を順番に並べる
-        randoms.sort(function(first, second){
-            return first - second;
-        });
+        if(document.getElementsByName(base+"_random_checkbox")[0].checked == true){
+            randoms.sort(function(first, second){
+                return first - second;
+            });
+        }
 
         //tableから問題情報を取得　問題を表示　回答をtempWordに入れる
         document.getElementById("tempWord_EJ").innerHTML = ""
@@ -147,7 +149,7 @@ function make_question_JE() {
     //minがmaxより大きかったらエラー表示
     if(rangenum_front > rangenum_rear){
         alert("エラー\n範囲は「範囲の最小値」～「範囲の最大値」で入力してください")
-    }else if(rangenum_rear-rangenum_front<9){
+    }else if(rangenum_rear-rangenum_front<10){
         alert("エラー\n範囲の大きさは10以上を指定してください")
     }else{
         /** 重複チェック用配列 */
@@ -169,9 +171,11 @@ function make_question_JE() {
         console.log(randoms);
 
         //配列内の値を順番に並べる
-        randoms.sort(function(first, second){
-            return first - second;
-        });
+        if(document.getElementsByName(base+"_random_checkbox")[0].checked == true){
+            randoms.sort(function(first, second){
+                return first - second;
+            });
+        }
 
         //tableから問題情報を取得　問題を表示　回答をtempWordに入れる
         document.getElementById("tempWord_JE").innerHTML = ""
@@ -252,29 +256,43 @@ function keypress_ivent(e) {
     var setpage = document.getElementById("setpage").innerHTML;
 
     if(e.key === '1' || e.key === '2' || e.key === '3' || e.key === '4' || e.key === '5' 
-    || e.key === '6' || e.key === '7' || e.key === '8' || e.key === '9'){
+    || e.key === '6' || e.key === '7' || e.key === '8' || e.key === '9'){ //回答の表示・非表示(問題ごと)
         if(setpage == "E-J"){
             make_answer_specify_EJ(e.key-1);
         }else if(setpage == "J-E"){
             make_answer_specify_JE(e.key-1);
         }
-    }else if(e.key === '0'){
+    }else if(e.key === '0'){ //回答の表示・非表示(問題ごと)
         if(setpage == "E-J"){
             make_answer_specify_EJ(9);
         }else if(setpage == "J-E"){
             make_answer_specify_JE(9);
         }
-    }else if(e.key === 'a' || e.key === 'A'){
+    }else if(e.key === 'a' || e.key === 'A'){ //回答の表示・非表示
         if(setpage == "E-J"){
             make_answer_EJ();
         }else if(setpage == "J-E"){
             make_answer_JE();
         }
-    }else if(e.key === 'M' || e.key === 'm'){
+    }else if(e.key === 'q' || e.key === 'Q'){ //問題の作成
         if(setpage == "E-J"){
             make_question_EJ();
         }else if(setpage == "J-E"){
             make_question_JE();
+        }
+    }else if(e.key === 'r' || e.key === 'R'){ //問題の作成
+        if(setpage == "E-J"){
+            if(document.getElementsByName("E-J_random_checkbox")[0].checked == true){
+                document.getElementsByName("E-J_random_checkbox")[0].checked = false
+            }else{
+                document.getElementsByName("E-J_random_checkbox")[0].checked = true
+            }
+        }else if(setpage == "J-E"){
+            if(document.getElementsByName("J-E_random_checkbox")[0].checked == true){
+                document.getElementsByName("J-E_random_checkbox")[0].checked = false
+            }else{
+                document.getElementsByName("J-E_random_checkbox")[0].checked = true
+            }
         }
     }
     return false; 
