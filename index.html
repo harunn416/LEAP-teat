@@ -4,17 +4,18 @@
 <head>
 	<title>LEAP 単語練習サイト Var.All_function</title>
 	<link rel="stylesheet" href="leap.css">
-	<script src="leap ALL.js"></script>
+	<script src="JavaScript/leap ALL.js"></script>
 </head>
 
-<body>
+<body class="all">
 	<div class="header">
 		<div class="header-logo first">LEAP</div>
 		<div class="header-logo second">test</div>
 		<div class="header-list">
 			<ul>
-				<li><button class="pageLink_button" onclick="change_page('E-J')">英語→日本語</button></li>
-				<li><button class="pageLink_button" onclick="change_page('J-E')">日本語→英語</button></li>
+				<li><button class="pageLink_button" onclick="change_page('E-J')">英語→日本語<br>(10問テスト)</button></li>
+				<li><button class="pageLink_button" onclick="change_page('J-E')">日本語→英語<br>(10問テスト)</button></li>
+				<li><button class="pageLink_button" onclick="change_page('many')">すべて作成</button></li>
 				<li><button class="pageLink_button" onclick="change_page('Words')">単語一覧</button></li>
 			</ul>
 		</div>
@@ -22,7 +23,8 @@
 
     <div id="tempWord_EJ" style="display: none;"></div>
 	<div id="tempWord_JE" style="display: none;"></div>
-    <div id="setpage" style="display: none;">J-E</div>
+	<div id="tempWord_ALL" style="display: none;"></div>
+    <div id="setpage" style="display: none;">many</div>
 
 	<div class="main" id="E-J" style="display: none;">
 		<div class="colmun">
@@ -56,74 +58,75 @@
 							<td class="question_num 1">1</td>
 							<td class="wordNum 1"></td>
 							<td class="question_text 1"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_EJ(0)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_EJ(0)"><nobr>表示</nobr></button></td>
 							<td class="answer 1"></td>
 						</tr>
 						<tr class="question 2">
 							<td class="question_num 2">2</td>
 							<td class="wordNum 2"></td>
 							<td class="question_text 2"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_EJ(1)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_EJ(1)"><nobr>表示</nobr></button></td>
 							<td class="answer 2"></td>
 						</tr>
 						<tr class="question 3">
 							<td class="question_num 3">3</td>
 							<td class="wordNum 3"></td>
 							<td class="question_text 3"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_EJ(2)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_EJ(2)"><nobr>表示</nobr></button></td>
 							<td class="answer 3"></td>
 						</tr>
 						<tr class="question 4">
 							<td class="question_num 4">4</td>
 							<td class="wordNum 4"></td>
 							<td class="question_text 4"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_EJ(3)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_EJ(3)"><nobr>表示</nobr></button></td>
 							<td class="answer 4"></td>
 						</tr>
 						<tr class="question 5">
 							<td class="question_num 5">5</td>
 							<td class="wordNum 5"></td>
 							<td class="question_text 5"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_EJ(4)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_EJ(4)"><nobr>表示</nobr></button></td>
 							<td class="answer 5"></td>
 						</tr>
 						<tr class="question 6">
 							<td class="question_num 6">6</td>
 							<td class="wordNum 6"></td>
 							<td class="question_text 6"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_EJ(5)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_EJ(5)"><nobr>表示</nobr></button></td>
 							<td class="answer 6"></td>
 						</tr>
 						<tr class="question 7">
 							<td class="question_num 7">7</td>
 							<td class="wordNum 7"></td>
 							<td class="question_text 7"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_EJ(6)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_EJ(6)"><nobr>表示</nobr></button></td>
 							<td class="answer 7"></td>
 						</tr>
 						<tr class="question 8">
 							<td class="question_num 8">8</td>
 							<td class="wordNum 8"></td>
 							<td class="question_text 8"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_EJ(7)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_EJ(7)"><nobr>表示</nobr></button></td>
 							<td class="answer 8"></td>
 						</tr>
 						<tr class="question 9">
 							<td class="question_num 9">9</td>
 							<td class="wordNum 9"></td>
 							<td class="question_text 9"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_EJ(8)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_EJ(8)"><nobr>表示</nobr></button></td>
 							<td class="answer 9"></td>
 						</tr>
 						<tr class="question 9">
 							<td class="question_num 0">10</td>
 							<td class="wordNum 0"></td>
 							<td class="question_text 0"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_EJ(9)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_EJ(9)"><nobr>表示</nobr></button></td>
 							<td class="answer 0"></td>
 						</tr>
 					</table>
 				</div>
+				<button class="button" id="E-J_make_button" style="margin: 10px 0 0 180px;" onclick="make_question_EJ()">問題作成</button>
 				<div>
 					<h5>「Q」キーで問題を作成します。<br>「1,2,...,0」のキーで回答の表示・非表示を切り替えます。<br>「A」キーで回答をすべて表示・非表示を切り替えます。<br>「R」キーで問題を降順に並べ変えるかどうか変更します。</h5>
 				</div>
@@ -131,7 +134,7 @@
 		</div>
 	</div>
 
-	<div class="main" id="J-E">
+	<div class="main" id="J-E" style="display: none;">
 		<div class="colmun">
 			<div class="question">
 				<h1 class="question-explamation">
@@ -164,76 +167,116 @@
 							<td class="question_num 1">1</td>
 							<td class="wordNum 1"></td>
 							<td class="question_text 1"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_JE(0)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_JE(0)"><nobr>表示</nobr></button></td>
 							<td class="answer 1"></td>
 						</tr>
 						<tr class="question 2">
 							<td class="question_num 2">2</td>
 							<td class="wordNum 2"></td>
 							<td class="question_text 2"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_JE(1)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_JE(1)"><nobr>表示</nobr></button></td>
 							<td class="answer 2"></td>
 						</tr>
 						<tr class="question 3">
 							<td class="question_num 3">3</td>
 							<td class="wordNum 3"></td>
 							<td class="question_text 3"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_JE(2)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_JE(2)"><nobr>表示</nobr></button></td>
 							<td class="answer 3"></td>
 						</tr>
 						<tr class="question 4">
 							<td class="question_num 4">4</td>
 							<td class="wordNum 4"></td>
 							<td class="question_text 4"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_JE(3)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_JE(3)"><nobr>表示</nobr></button></td>
 							<td class="answer 4"></td>
 						</tr>
 						<tr class="question 5">
 							<td class="question_num 5">5</td>
 							<td class="wordNum 5"></td>
 							<td class="question_text 5"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_JE(4)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_JE(4)"><nobr>表示</nobr></button></td>
 							<td class="answer 5"></td>
 						</tr>
 						<tr class="question 6">
 							<td class="question_num 6">6</td>
 							<td class="wordNum 6"></td>
 							<td class="question_text 6"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_JE(5)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_JE(5)"><nobr>表示</nobr></button></td>
 							<td class="answer 6"></td>
 						</tr>
 						<tr class="question 7">
 							<td class="question_num 7">7</td>
 							<td class="wordNum 7"></td>
 							<td class="question_text 7"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_JE(6)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_JE(6)"><nobr>表示</nobr></button></td>
 							<td class="answer 7"></td>
 						</tr>
 						<tr class="question 8">
 							<td class="question_num 8">8</td>
 							<td class="wordNum 8"></td>
 							<td class="question_text 8"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_JE(7)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_JE(7)"><nobr>表示</nobr></button></td>
 							<td class="answer 8"></td>
 						</tr>
 						<tr class="question 9">
 							<td class="question_num 9">9</td>
 							<td class="wordNum 9"></td>
 							<td class="question_text 9"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_JE(8)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_JE(8)"><nobr>表示</nobr></button></td>
 							<td class="answer 9"></td>
 						</tr>
 						<tr class="question 9">
 							<td class="question_num 0">10</td>
 							<td class="wordNum 0"></td>
 							<td class="question_text 0"></td>
-							<td><button class="displayButton" onclick="make_answer_specify_JE(9)"><nobr>表示</nobr></button></td>
+							<td><button class="displayButton" onclick="make_answer_specific_JE(9)"><nobr>表示</nobr></button></td>
 							<td class="answer 0"></td>
 						</tr>
 					</table>
 				</div>
+				<button class="button" id="J-E_make_button" style="margin: 10px 0 0 180px;" onclick="make_question_JE()">問題作成</button>
 				<div>
 					<h5>「Q」キーで問題を作成します。<br>「1,2,...,0」のキーで回答の表示・非表示を切り替えます。<br>「A」キーで回答をすべて表示・非表示を切り替えます。<br>「R」キーで問題を降順に並べ変えるかどうか変更します。</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="main" id="many">
+		<div class="colmun">
+			<div class="question">
+				<h1 class="question-explamation">
+					指定した範囲内の単語の問題を順番に作成します。(英語→日本語)
+				</h1>
+				
+				<button class="button" id="many_make_button" onclick="make_question_ALL('E-J')">問題作成<br>(英語→日本語)</button>
+				<button class="button" id="many_make_button" onclick="make_question_ALL('J-E')">問題作成<br>(日本語→英語)</button>
+				<button class="button" id="many_answer_button" onclick="make_answer_ALL()">回答を表示</button>
+				<label><input type="checkbox" name="many_random_checkbox" style="transform: scale(1.4);"> 問題を並びかえる(未実装)</label>
+
+				<div class="range">
+					<a>範囲指定:</a>
+					<input type="number" id="all_rangenum_front">
+					<a>～</a>
+					<input type="number" id="all_rangenum_rear">
+				</div>
+
+				<div class="tablelist" id="all_table_origin">
+					<table class="Qtable" border="1" id="all_table">
+						<tr>
+							<th>列<br>番号</th>
+							<th>単語<br>番号</th>
+							<th>問題</th>
+							<th>答え<br><nobr>表示</nobr></th>
+							<th>答え</th>
+						</tr>
+					</table>
+				</div>
+				<button class="button" id="many_make_button" onclick="make_question_ALL('E-J')">問題作成<br>(英語→日本語)</button>
+				<button class="button" id="many_make_button" onclick="make_question_ALL('J-E')">問題作成<br>(日本語→英語)</button>
+				<div>
+					<h5>「Q」キーで問題を作成します。<br>「A」キーで回答をすべて表示・非表示を切り替えます。<br>「R」キーで問題を降順に並べ変えるかどうか変更します。</h5>
 				</div>
 			</div>
 		</div>
