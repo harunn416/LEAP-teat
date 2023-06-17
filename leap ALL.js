@@ -258,9 +258,6 @@ function make_question_ALL(type){
     var rangenum_front = document.getElementById("all_rangenum_front").value;
     var rangenum_rear = document.getElementById("all_rangenum_rear").value;
 
-    rangenum_front = 2
-    rangenum_rear = 100
-
     rangenum_front = Number(rangenum_front);
     rangenum_rear = Number(rangenum_rear);
 
