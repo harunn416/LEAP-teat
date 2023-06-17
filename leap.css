@@ -1,7 +1,7 @@
 .header {
     background-color: #047c48;
     color: #ffffff;
-    width: 900px;
+    width: 1000px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -38,18 +38,18 @@
 }
 
 .pageLink_button {
-    font-size: 25px;
+    font-size: 20px;
     text-decoration: none;
     border: 0px;
     background-color: #047c48;
-    padding: 20px 10px 10px 10px;
+    padding: 10px 10px 0px 10px;
     margin: 0px ;
     color: #ffffff;
 }
 
 .main {
     background-color: #c9fde8;
-    width: 900px;
+    width: 1000px;
     margin: 0 auto;
     padding: 100px 0px 5px 0px;
 }
@@ -65,7 +65,7 @@
     margin: 10px;
 }
 
-#J-E_rangenum_front, #J-E_rangenum_rear, #E-J_rangenum_front, #E-J_rangenum_rear {
+#J-E_rangenum_front, #J-E_rangenum_rear, #E-J_rangenum_front, #E-J_rangenum_rear, #many_rangenum_front, #many_rangenum_rear {
     width: 80px;
     font-size: 20px;
 }
@@ -82,7 +82,7 @@
     transform: translateY(-4px);
 }
 
-.displayButton {
+.displayButton ,.all_displayButton {
     font-weight: 500;
     font-size: 15px;
     padding: 0px 8px;
@@ -139,7 +139,7 @@
 
 .footer {
     background-color: #047c48;
-    width: 900px;
+    width: 1000px;
     margin: 0 auto;
 }
 
