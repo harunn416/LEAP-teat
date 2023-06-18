@@ -65,7 +65,7 @@
     margin: 10px;
 }
 
-#J-E_rangenum_front, #J-E_rangenum_rear, #E-J_rangenum_front, #E-J_rangenum_rear, #many_rangenum_front, #many_rangenum_rear {
+#J-E_rangenum_front, #J-E_rangenum_rear, #E-J_rangenum_front, #E-J_rangenum_rear, #many_rangenum_front, #many_rangenum_rear, #all_rangenum_front, #all_rangenum_rear {
     width: 80px;
     font-size: 20px;
 }
