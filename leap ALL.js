@@ -301,7 +301,7 @@ function make_question_ALL(type){
         targetElement.appendChild(table);
 
         //回答の内容を初期化
-        document.getElementById("tempWord_EJ").innerHTML = ""
+        document.getElementById("tempWord_ALL").innerHTML = ""
 
         //再定義
         var tableElem = document.getElementById('all_table');
@@ -331,6 +331,9 @@ function make_question_ALL(type){
             var cellElem_4 = trElem.insertCell(3).innerHTML = '<button class="all_displayButton" onclick="make_answer_specific('+i+')"><nobr>表示</nobr></button>';
             var cellElem_5 = trElem.insertCell(4).setAttribute("class","all_answer");
         }
+
+        //回答表示ボタンを初期化
+        document.getElementById("many_answer_button").innerHTML = "回答を表示";
 
         //ページの先頭へ
         scrollTo({
