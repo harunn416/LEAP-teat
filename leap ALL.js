@@ -258,13 +258,37 @@ function make_question_ALL(type){
     var rangenum_front = document.getElementById("all_rangenum_front").value;
     var rangenum_rear = document.getElementById("all_rangenum_rear").value;
 
+    //数字化
     rangenum_front = Number(rangenum_front);
     rangenum_rear = Number(rangenum_rear);
 
     if(rangenum_front == "" || rangenum_rear == ""){alert("範囲を両方入力してください")}
     else if(rangenum_front < 1 || rangenum_rear > 1935){alert("範囲は1~1935の間に設定してください")}
     else if(rangenum_rear <= rangenum_front){alert("正しく範囲を入力してください")}
-    else{//一度すべてを消して初期化
+    else{
+        //問題の順番の配列を作る
+        var q_num_ary_base = []
+        for(var i=1; i <= rangenum_rear-rangenum_front +1; i++){
+            q_num_ary_base.push(i);
+        }
+        console.log("初期",q_num_ary_base)
+
+        //配列内の値をランダムに変える。
+        if(document.getElementsByName("many_random_checkbox")[0].checked == false){
+            var q_num_ary_base_temp = [];
+            while(q_num_ary_base.length >0){
+                var random = Math.floor( Math.random() * (q_num_ary_base.length) );
+                q_num_ary_base_temp.push(q_num_ary_base[random]);
+                q_num_ary_base.splice(random,1);
+            }
+            //並び変えたものを置換
+            console.log(q_num_ary_base_temp);
+            q_num_ary_base = q_num_ary_base_temp
+        }
+
+        console.log("並び替え後",q_num_ary_base);
+        
+    //一度すべてを消して初期化
 
         //テーブルの初期化
         tableElem.remove();
@@ -311,18 +335,18 @@ function make_question_ALL(type){
             var trElem = tableElem.insertRow(-1);
 
             // 単語番号
-            var word_num = document.getElementById("words_table").rows[i +rangenum_front].cells[0].innerHTML;
+            var word_num = document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[0].innerHTML;
             // 単語
             if(type == "E-J"){
-                var word_question = document.getElementById("words_table").rows[i +rangenum_front].cells[1].innerHTML;
+                var word_question = document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[1].innerHTML;
             }else{
-                var word_question = document.getElementById("words_table").rows[i +rangenum_front].cells[2].innerHTML;
+                var word_question = document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[2].innerHTML;
             }
                 // 回答作成
             if(type == "E-J"){
-                document.getElementById("tempWord_ALL").innerHTML = `${document.getElementById("tempWord_ALL").innerHTML + document.getElementById("words_table").rows[i +rangenum_front].cells[2].innerHTML},`;
+                document.getElementById("tempWord_ALL").innerHTML = `${document.getElementById("tempWord_ALL").innerHTML + document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[2].innerHTML},`;
             }else{
-                document.getElementById("tempWord_ALL").innerHTML = `${document.getElementById("tempWord_ALL").innerHTML + document.getElementById("words_table").rows[i +rangenum_front].cells[1].innerHTML},`;
+                document.getElementById("tempWord_ALL").innerHTML = `${document.getElementById("tempWord_ALL").innerHTML + document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[1].innerHTML},`;
             }
             // td要素を追加,td要素にテキストを追加
             var cellElem_1 = trElem.insertCell(0).innerHTML = i+1;
@@ -373,14 +397,14 @@ function make_answer_specific(i){
     var deta = document.getElementById("tempWord_ALL").innerHTML;
 
     if (deta != "") {
-        if (document.getElementById("many_answer_button").innerHTML == "回答を表示") {
+        if (document.getElementsByClassName("all_displayButton")[i].innerHTML == "<nobr>表示</nobr>") {
             let deta_array = deta.split(",")
             console.log(deta_array);
 
             document.getElementsByClassName("all_answer")[i].innerHTML = deta_array[i];
             document.getElementsByClassName("all_displayButton")[i].innerHTML = "<nobr>非表示</nobr>";
 
-        } else if (document.getElementById("many_answer_button").innerHTML == "回答を非表示") {
+        } else if (document.getElementsByClassName("all_displayButton")[i].innerHTML == "<nobr>非表示</nobr>") {
             document.getElementsByClassName("all_answer")[i].innerHTML = "";
             document.getElementsByClassName("all_displayButton")[i].innerHTML = "<nobr>表示</nobr>";
         }
