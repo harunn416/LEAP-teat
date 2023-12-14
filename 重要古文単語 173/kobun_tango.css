@@ -1,0 +1,152 @@
+.header {
+    background-color: #a77d0b;
+    color: #ffffff;
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    z-index: 1000;
+}
+
+
+.header-logo {
+    float: left;
+}
+
+
+.first {
+    padding: 5px 5px 5px 50px;
+    font-weight: bold;
+    font-size: 50px;
+    letter-spacing: 10px;
+}
+
+.second {
+    padding-top: 10px;
+    font-size: 30px;
+    letter-spacing: 5px;
+}
+
+.header li {
+    font-size: 25px;
+    list-style: none;
+    float: left;
+}
+
+.pageLink_button {
+    font-size: 20px;
+    text-decoration: none;
+    border: 0px;
+    background-color: #a77d0b;
+    padding: 10px 10px 0px 10px;
+    margin: 0px ;
+    color: #ffffff;
+}
+
+.main {
+    background-color: #ffe8aa;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 100px 0px 5px 0px;
+}
+
+.question-explamation {
+    font-size: 30px;
+    padding: 0px;
+}
+
+.range {
+    display: flex;
+    font-size: 20px;
+    margin: 10px;
+}
+
+#J-E_rangenum_front, #J-E_rangenum_rear, #E-J_rangenum_front, #E-J_rangenum_rear, #many_rangenum_front, #many_rangenum_rear, #all_rangenum_front, #all_rangenum_rear {
+    width: 80px;
+    font-size: 20px;
+}
+
+.button {
+    font-weight: 500;
+    font-size: 20px;
+    padding: 2px 10px;
+    margin: 10px;
+    color: #ffffff;
+    background-color: #a77d0b;
+    border-radius: 2vh;
+    box-shadow: 0 4px 2px #035833;
+    transform: translateY(-4px);
+}
+
+.displayButton ,.all_displayButton {
+    font-weight: 500;
+    font-size: 15px;
+    padding: 0px 8px;
+    margin: 5px 1px 1px 1px;
+    color: #ffffff;
+    background-color: #a77d0b;
+    border-radius: 2vh;
+    box-shadow: 0 4px 2px #035833;
+    transform: translateY(-4px);
+}
+
+.make_button:hover {
+    background-color: #05683d;
+}
+
+.make_button:active {
+    background-color: #035833;
+    box-shadow: 0 0;
+    transform: translateY(0px);
+}
+
+.tablelist {
+    display: flex;
+}
+
+.Qtable{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.Rtable {
+    font-size: 20px;
+    width: auto;
+}
+
+.question_num {
+    text-align: center;
+}
+
+.question_text {
+    font-weight: 100;
+}
+
+.checkbox {
+    transform: scale(2.2);
+    margin: 0 13px 0 13px;
+}
+
+
+
+.imput {
+    font-size: 20px;
+}
+
+.footer {
+    background-color: #a77d0b;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.footer a {
+    margin: 0 10px;
+    list-style: none;
+    color: #ffffff;
+}
