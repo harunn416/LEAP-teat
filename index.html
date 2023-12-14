@@ -255,11 +255,17 @@
 				<button class="button" id="many_answer_button" onclick="make_answer_ALL()">回答を表示</button>
 				<label><input type="checkbox" name="many_random_checkbox" checked="true" style="transform: scale(1.4);"> 問題を並びかえる(未実装)</label>
 
-				<div class="range">
+				<div class="range" style="align-items: flex-end;">
 					<a>範囲指定:</a>
 					<input type="number" id="all_rangenum_front">
 					<a>～</a>
 					<input type="number" id="all_rangenum_rear">
+					<div>
+						<label><input type="checkbox" name="rec_range" checked="true" style="transform: scale(1.4); margin: 0 10px 0 30px;">範囲を記録</label>
+						<a style="font-size: 13px;">※ブラウザを再起動すると記録は初期化されます。ページの更新では消えません。</a>
+						
+					</div>
+					
 				</div>
 
 				<div class="tablelist" id="all_table_origin">
@@ -9976,6 +9982,7 @@
 	<div class="footer">
 		<ul>
 			<a href="https://docs.google.com/forms/d/e/1FAIpQLSccYvgF1qphMvVYDCCjVI34up_VGGoFdpbsDjJG67wLP643HQ/viewform?usp=sf_link" target="_blank">意見・バグ報告はこちら</a>
+			<a href="重要古文単語 173/index.html">古文単語 173 へ</a>
 		</ul>
 	</div>
 </body>
