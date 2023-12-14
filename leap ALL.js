@@ -1,6 +1,6 @@
 function change_page(page_name) {
     for(var i=0; i<4; i++){
-        document.getElementsByClassName("main")[i].style.display = "none";
+    document.getElementsByClassName("main")[i].style.display = "none";
     }
 
     document.getElementById(page_name).style.display = "";
@@ -266,6 +266,9 @@ function make_question_ALL(type){
     else if(rangenum_front < 1 || rangenum_rear > 1935){alert("範囲は1~1935の間に設定してください")}
     else if(rangenum_rear <= rangenum_front){alert("正しく範囲を入力してください")}
     else{
+        //チェックが入ってたら範囲を記録
+        rec_range(rangenum_front,rangenum_rear);
+
         //問題の順番の配列を作る
         var q_num_ary_base = []
         for(var i=1; i <= rangenum_rear-rangenum_front +1; i++){
@@ -469,4 +472,15 @@ function keypress_ivent(e) {
         }
     }
     return false; 
+}
+
+function rec_range(min,max){
+    sessionStorage.setItem("min",min);
+    sessionStorage.setItem("max",max);
+}
+
+function get_range(){
+    var min = sessionStorage.getItem("min")
+    var max = sessionStorage.getItem("max")
+    return([min,max])
 }
