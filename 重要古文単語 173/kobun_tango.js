@@ -1,7 +1,30 @@
 function start() {
+    //単語の数を獲得
+    var words_num = document.getElementById("words_table").rows.length -1
     //最初に単語一覧が格納されているテーブルの列番号を記録しておく
-    console.log(document.getElementById("words_table").rows.length -1)
     document.getElementById("words_num").innerHTML = document.getElementById("words_table").rows.length -1
+    console.log("単語の数",words_num)
+    //checkの母数を変更する
+    document.getElementById("points_mother").innerHTML = words_num
+
+    //初めて利用(checkリスト,check数がない場合)はリストをローカルストレージに作成
+    
+    if(localStorage.getItem("check_list")==null){
+        //checkリストの作成
+        var check_li = []
+        //no check である0で埋める
+        for(var i=0; i<words_num; i++){
+            check_li.push(0)
+        }
+        //文字列に変換する
+        var li_string = JSON.stringify(check_li);
+        //ローカルストレージに格納する
+        localStorage.setItem("check_list", li_string)
+        localStorage.setItem("check_num", 0)
+    }
+
+    //表示中の現在のcheck数を書き換え
+    document.getElementById("points").innerHTML = localStorage.getItem("check_num")
 }
 
 function change_page(page_name) {
@@ -14,6 +37,11 @@ function change_page(page_name) {
 }
 
 function make_question_ALL(type){
+    console.time("make_time")
+    //チェックリスト と チェック数 を取得
+    var check_li = JSON.parse(localStorage.getItem("check_list"))
+    var check_num = Number(localStorage.getItem("check_num"))
+
     // table要素を取得
     var tableElem = document.getElementById('all_table');
 
@@ -39,7 +67,6 @@ function make_question_ALL(type){
         for(var i=1; i <= rangenum_rear-rangenum_front +1; i++){
             q_num_ary_base.push(i);
         }
-        console.log("初期",q_num_ary_base)
 
         //配列内の値をランダムに変える。
         if(document.getElementsByName("many_random_checkbox")[0].checked == false){
@@ -50,11 +77,8 @@ function make_question_ALL(type){
                 q_num_ary_base.splice(random,1);
             }
             //並び変えたものを置換
-            console.log(q_num_ary_base_temp);
             q_num_ary_base = q_num_ary_base_temp
         }
-
-        console.log("並び替え後",q_num_ary_base);
         
     //一度すべてを消して初期化
 
@@ -84,11 +108,15 @@ function make_question_ALL(type){
             cell1_5.innerHTML = "答え<br>表示";
             var cell1_6 = document.createElement("th");
             cell1_6.innerHTML = "答え";
+            var cell1_7 = document.createElement("th");
+            cell1_7.innerHTML = "check";
         }else{
             var cell1_4 = document.createElement("th");
             cell1_4.innerHTML = "答え<br>表示";
             var cell1_5 = document.createElement("th");
             cell1_5.innerHTML = "答え";
+            var cell1_6 = document.createElement("th");
+            cell1_6.innerHTML = "check";
         }
         
         //1行目に追加
@@ -97,8 +125,9 @@ function make_question_ALL(type){
         row1.appendChild(cell1_3);
         row1.appendChild(cell1_4);
         row1.appendChild(cell1_5);
+        row1.appendChild(cell1_6);
         if(document.getElementsByName("many_kanzi_checkbox")[0].checked == true){
-            row1.appendChild(cell1_6);
+            row1.appendChild(cell1_7);
         }
 
         // テーブルに行を追加
@@ -113,37 +142,113 @@ function make_question_ALL(type){
         //再定義
         var tableElem = document.getElementById('all_table');
 
-        for(var i=0; i<rangenum_rear -rangenum_front +1; i++){
-            // tbody要素にtr要素（行）を最後に追加
-            var trElem = tableElem.insertRow(-1);
+        
+        //no ch のみ出力する場合
+        console.log(document.getElementsByName("no_check_checkbox")[0].checked == true)
+        if(document.getElementsByName("no_check_checkbox")[0].checked == true){
+            //それぞれの行を作成
+            //個別の回答を作成するときに持たせる行番号を個別で指定
+            var j = 0
+            for(var i=0; i<rangenum_rear -rangenum_front +1; i++){
+                // 単語番号
+                var word_num = document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[0].innerHTML;
+                if(check_li[word_num-1]==0){
+                    // tbody要素にtr要素（行）を最後に追加
+                    var trElem = tableElem.insertRow(-1);
 
-            // 単語番号
-            var word_num = document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[0].innerHTML;
-            // 単語
-            if(type == "E-J"){
-                var word_question = document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[1].innerHTML;
-            }else{
-                var word_question = document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[2].innerHTML;
+                    // 単語
+                    if(type == "E-J"){
+                        var word_question = document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[1].innerHTML;
+                    }else{
+                        var word_question = document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[2].innerHTML;
+                    }
+                    //漢字
+                    if(document.getElementsByName("many_kanzi_checkbox")[0].checked == true){var kanzi = document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[3].innerHTML;}
+                    
+                    // 回答作成
+                    if(type == "E-J"){
+                        document.getElementById("tempWord_ALL").innerHTML = `${document.getElementById("tempWord_ALL").innerHTML + document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[2].innerHTML},`;
+                    }else{
+                        document.getElementById("tempWord_ALL").innerHTML = `${document.getElementById("tempWord_ALL").innerHTML + document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[1].innerHTML},`;
+                    }
+                    
+                    // td要素を追加,td要素にテキストを追加
+                    var cellElem_1 = trElem.insertCell(0).innerHTML = i+1;
+                    var cellElem_2 = trElem.insertCell(1).innerHTML = word_num;
+                    var cellElem_3 = trElem.insertCell(2).innerHTML = word_question;
+                    if(document.getElementsByName("many_kanzi_checkbox")[0].checked == true){
+                        var cellElem_4 = trElem.insertCell(3).innerHTML = kanzi
+                        var cellElem_5 = trElem.insertCell(4).innerHTML = '<button class="all_displayButton" onclick="make_answer_specific('+j+')"><nobr>表示</nobr></button>';
+                        var cellElem_6 = trElem.insertCell(5).setAttribute("class","all_answer");
+                        //checkボタンを決める
+                        if(check_li[word_num-1]==0){
+                            var cellElem_7 = trElem.insertCell(6).innerHTML = '<button class="check_button" onclick="change_check('+(word_num-1)+','+j+')">no ch</button>';
+                        }else{
+                            var cellElem_7 = trElem.insertCell(6).innerHTML = '<button class="check_button checked" onclick="change_check('+(word_num-1)+','+j+')">checked</button>';
+                        }
+                    }else{
+                        var cellElem_4 = trElem.insertCell(3).innerHTML = '<button class="all_displayButton" onclick="make_answer_specific('+j+')"><nobr>表示</nobr></button>';
+                        var cellElem_5 = trElem.insertCell(4).setAttribute("class","all_answer");
+                        //checkボタンを決める
+                        if(check_li[word_num-1]==0){
+                            var cellElem_6 = trElem.insertCell(5).innerHTML = '<button class="check_button" onclick="change_check('+(word_num-1)+','+j+')">no ch</button>';
+                        }else{
+                            var cellElem_6 = trElem.insertCell(5).innerHTML = '<button class="check_button checked" onclick="change_check('+(word_num-1)+','+j+')">checked</button>';
+                        }
+                    }
+                    j = j +1
+                }
+
+                
             }
-            //漢字
-            var kanzi = document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[3].innerHTML;
-            // 回答作成
-            if(type == "E-J"){
-                document.getElementById("tempWord_ALL").innerHTML = `${document.getElementById("tempWord_ALL").innerHTML + document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[2].innerHTML},`;
-            }else{
-                document.getElementById("tempWord_ALL").innerHTML = `${document.getElementById("tempWord_ALL").innerHTML + document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[1].innerHTML},`;
-            }
-            // td要素を追加,td要素にテキストを追加
-            var cellElem_1 = trElem.insertCell(0).innerHTML = i+1;
-            var cellElem_2 = trElem.insertCell(1).innerHTML = word_num;
-            var cellElem_3 = trElem.insertCell(2).innerHTML = word_question;
-            if(document.getElementsByName("many_kanzi_checkbox")[0].checked == true){
-                var cellElem_4 = trElem.insertCell(3).innerHTML = kanzi
-                var cellElem_5 = trElem.insertCell(4).innerHTML = '<button class="all_displayButton" onclick="make_answer_specific('+i+')"><nobr>表示</nobr></button>';
-                var cellElem_6 = trElem.insertCell(5).setAttribute("class","all_answer");
-            }else{
-                var cellElem_4 = trElem.insertCell(3).innerHTML = '<button class="all_displayButton" onclick="make_answer_specific('+i+')"><nobr>表示</nobr></button>';
-                var cellElem_5 = trElem.insertCell(4).setAttribute("class","all_answer");
+        }else{
+            //それぞれの行を作成
+            for(var i=0; i<rangenum_rear -rangenum_front +1; i++){
+                // tbody要素にtr要素（行）を最後に追加
+                var trElem = tableElem.insertRow(-1);
+
+                // 単語番号
+                var word_num = document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[0].innerHTML;
+                // 単語
+                if(type == "E-J"){
+                    var word_question = document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[1].innerHTML;
+                }else{
+                    var word_question = document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[2].innerHTML;
+                }
+                //漢字
+                if(document.getElementsByName("many_kanzi_checkbox")[0].checked == true){var kanzi = document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[3].innerHTML;}
+                
+                // 回答作成
+                if(type == "E-J"){
+                    document.getElementById("tempWord_ALL").innerHTML = `${document.getElementById("tempWord_ALL").innerHTML + document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[2].innerHTML},`;
+                }else{
+                    document.getElementById("tempWord_ALL").innerHTML = `${document.getElementById("tempWord_ALL").innerHTML + document.getElementById("words_table").rows[q_num_ary_base[i]+rangenum_front -1].cells[1].innerHTML},`;
+                }
+                
+                // td要素を追加,td要素にテキストを追加
+                var cellElem_1 = trElem.insertCell(0).innerHTML = i+1;
+                var cellElem_2 = trElem.insertCell(1).innerHTML = word_num;
+                var cellElem_3 = trElem.insertCell(2).innerHTML = word_question;
+                if(document.getElementsByName("many_kanzi_checkbox")[0].checked == true){
+                    var cellElem_4 = trElem.insertCell(3).innerHTML = kanzi
+                    var cellElem_5 = trElem.insertCell(4).innerHTML = '<button class="all_displayButton" onclick="make_answer_specific('+i+')"><nobr>表示</nobr></button>';
+                    var cellElem_6 = trElem.insertCell(5).setAttribute("class","all_answer");
+                    //checkボタンを決める
+                    if(check_li[word_num-1]==0){
+                        var cellElem_7 = trElem.insertCell(6).innerHTML = '<button class="check_button" onclick="change_check('+(word_num-1)+','+i+')">no ch</button>';
+                    }else{
+                        var cellElem_7 = trElem.insertCell(6).innerHTML = '<button class="check_button checked" onclick="change_check('+(word_num-1)+','+i+')">checked</button>';
+                    }
+                }else{
+                    var cellElem_4 = trElem.insertCell(3).innerHTML = '<button class="all_displayButton" onclick="make_answer_specific('+i+')"><nobr>表示</nobr></button>';
+                    var cellElem_5 = trElem.insertCell(4).setAttribute("class","all_answer");
+                    //checkボタンを決める
+                    if(check_li[word_num-1]==0){
+                        var cellElem_6 = trElem.insertCell(5).innerHTML = '<button class="check_button" onclick="change_check('+(word_num-1)+','+i+')">no ch</button>';
+                    }else{
+                        var cellElem_6 = trElem.insertCell(5).innerHTML = '<button class="check_button checked" onclick="change_check('+(word_num-1)+','+i+')">checked</button>';
+                    }
+                }
             }
         }
 
@@ -156,6 +261,7 @@ function make_question_ALL(type){
             behavior: "smooth"
         })
     }
+    console.timeEnd("make_time")
 }
 
 function make_answer_ALL(){
@@ -201,6 +307,80 @@ function make_answer_specific(i){
         }
     } else {
         document.getElementsByClassName("all_answer")[0].innerHTML = "問題を作成してください";
+    }
+}
+
+function change_check(word_num,i) {
+    //ローカルストレージから各種値を取得
+    var check_li = JSON.parse(localStorage.getItem("check_list"))
+    var check_num = Number(localStorage.getItem("check_num"))
+
+    if(document.getElementsByClassName("check_button")[i].innerHTML == "no ch"){
+        //それぞれ値変更
+        check_li[word_num] = 1
+        check_num = check_num + 1
+
+        //保存する
+            //文字列に変換する
+            var li_string = JSON.stringify(check_li);
+            //ローカルストレージに格納する
+            localStorage.setItem("check_list", li_string)
+            localStorage.setItem("check_num", check_num)
+        
+        //ボタン変更
+        document.getElementsByClassName("check_button")[i].innerHTML = "checked"
+        //クラス変更　(背景色をかえるため)
+        document.getElementsByClassName("check_button")[i].classList.add("checked")
+
+        //表示中の現在のcheck数を書き換え
+        document.getElementById("points").innerHTML = localStorage.getItem("check_num")
+    }else{
+        //それぞれ値変更
+        check_li[word_num] = 0
+        check_num = check_num - 1
+
+        //保存する
+            //文字列に変換する
+            var li_string = JSON.stringify(check_li);
+            //ローカルストレージに格納する
+            localStorage.setItem("check_list", li_string)
+            localStorage.setItem("check_num", check_num)
+        
+        //ボタン変更
+        document.getElementsByClassName("check_button")[i].innerHTML = "no ch"
+        //クラス変更　(背景色をかえるため)
+        document.getElementsByClassName("check_button")[i].classList.remove("checked")
+
+        //表示中の現在のcheck数を書き換え
+        document.getElementById("points").innerHTML = localStorage.getItem("check_num")
+    }
+}
+
+function clear_check() {
+    if(confirm("checkを初期化しますがよろしいですか？  テーブルは一度削除されます。")==true){
+        console.time("temp")
+        //単語数取得
+        var words_num = document.getElementById("points_mother").innerHTML
+        //local storage から削除
+        //checkリストの作成
+        var check_li = []
+        //no check である0で埋める
+        for(var i=0; i<words_num; i++){
+            check_li.push(0)
+        }
+        //文字列に変換する
+        var li_string = JSON.stringify(check_li);
+        //ローカルストレージに格納する
+        localStorage.setItem("check_list", li_string)
+        localStorage.setItem("check_num", 0)
+        console.time("temp")
+        //表示中の現在のcheck数を書き換え
+        document.getElementById("points").innerHTML = localStorage.getItem("check_num")
+
+        //テーブル初期化
+        document.getElementById('all_table').remove()
+        //初期テーブル作成
+        document.getElementById("all_table_origin").innerHTML = '<table class="Qtable" border="1" id="all_table"><tr><th>列<br>番号</th><th>単語<br>番号</th><th>問題</th><th>漢字</th><th>答え<br><nobr>表示</nobr></th><th>答え</th><th>check</th></tr></table>'
     }
 }
 
