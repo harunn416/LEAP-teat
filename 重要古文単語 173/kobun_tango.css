@@ -64,7 +64,7 @@
 .range {
     display: flex;
     font-size: 20px;
-    margin: 10px;
+    margin: 0 10px;
 }
 
 #J-E_rangenum_front, #J-E_rangenum_rear, #E-J_rangenum_front, #E-J_rangenum_rear, #many_rangenum_front, #many_rangenum_rear, #all_rangenum_front, #all_rangenum_rear {
@@ -80,7 +80,7 @@
     color: #ffffff;
     background-color: #a77d0b;
     border-radius: 2vh;
-    box-shadow: 0 4px 2px #035833;
+    box-shadow: 0 4px 2px #634a07;
     transform: translateY(-4px);
 }
 
@@ -92,16 +92,32 @@
     color: #ffffff;
     background-color: #a77d0b;
     border-radius: 2vh;
-    box-shadow: 0 4px 2px #035833;
+    box-shadow: 0 4px 2px #6e5307;
     transform: translateY(-4px);
 }
 
+.check_button {
+    font-weight: 500;
+    font-size: 15px;
+    padding: 3px 8px;
+    margin: 5px 1px 1px 1px;
+    color: #ffffff;
+    background-color: #005892;
+    border-radius: 2vh;
+    box-shadow: 0 4px 2px #6e5307;
+    transform: translateY(-4px);
+}
+
+.checked {
+    background-color: #ac2a02;
+}
+
 .make_button:hover {
-    background-color: #05683d;
+    background-color: #a77d0b;
 }
 
 .make_button:active {
-    background-color: #035833;
+    background-color: #a77d0b;
     box-shadow: 0 0;
     transform: translateY(0px);
 }
