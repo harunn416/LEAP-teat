@@ -33,18 +33,33 @@
 					指定した範囲内全ての単語の問題を作成します。
 				</h1>
 				
-				<button class="button" id="many_make_button" onclick="make_question_ALL('E-J')">問題作成<br>(古語→現代語)</button>
-				<button class="button" id="many_make_button" onclick="make_question_ALL('J-E')">問題作成<br>(古語→現代語)<br>※非推奨</button>
-				<button class="button" id="many_answer_button" onclick="make_answer_ALL()">回答を表示</button>
-				<label><input type="checkbox" name="many_random_checkbox" style="transform: scale(1.4);" checked="true"> 問題を並びかえる</label>
-				<label><input type="checkbox" name="many_kanzi_checkbox" style="transform: scale(1.4);" checked="true"> 漢字を表示する</label>
-
-				<div class="range">
-					<a>範囲指定:</a>
-					<input type="number" id="all_rangenum_front">
-					<a>～</a>
-					<input type="number" id="all_rangenum_rear">
-					<a style="font-size: 15px;margin: auto 0 0 10px;">※省略場合は全てを参照します</a>
+				<div style="display: flex;">
+					<div><button class="button" id="many_make_button" onclick="make_question_ALL('E-J')">問題作成<br>(古語→現代語)</button></div>
+					<div><button class="button" id="many_make_button" onclick="make_question_ALL('J-E')">問題作成<br>(古語→現代語)<br>※非推奨</button></div>
+					<div><button class="button" id="many_answer_button" onclick="make_answer_ALL()">回答を表示</button></div>
+					<ul style="list-style: none;">
+						<li><label><input type="checkbox" name="many_random_checkbox" style="transform: scale(1.4);" checked="true"> 問題を連番で出す</label></li>
+						<li><label><input type="checkbox" name="many_kanzi_checkbox" style="transform: scale(1.4);" checked="true"> 漢字表記を表示する</label></li>
+						<li><label><input type="checkbox" name="no_check_checkbox" style="transform: scale(1.4);" > no check のみ表示</label></li>
+					</ul>
+				</div>
+				
+				<div style="display: flex;align-items: end;margin: 10px;">
+					<div class="range">
+						<a>範囲指定:</a>
+						<input type="number" id="all_rangenum_front">
+						<a>～</a>
+						<input type="number" id="all_rangenum_rear">
+						<a style="font-size: 15px;margin: auto 0 0 10px;">※省略場合は全てを参照します</a>
+					</div>
+					<div id="words_point" style="margin: auto 0 0 20px;" border="1">
+						現在のcheck数
+						<span id="points" style="color: rgb(87, 0, 0);font-weight: bold;font-size: 20px;">0</span>
+						/
+						<span id="points_mother">未読込</span>
+						個
+					</div>
+					<button class="button" name="clear_check" onclick="clear_check()" style="margin: 0 0 0 50px;font-size: 18px;background-color: #be1d01;">check初期化</button>
 				</div>
 
 				<div class="tablelist" id="all_table_origin">
@@ -56,6 +71,7 @@
 							<th>漢字</th>
 							<th>答え<br><nobr>表示</nobr></th>
 							<th>答え</th>
+							<th>check</th>
 						</tr>
 					</table>
 				</div>
@@ -1124,6 +1140,22 @@
 			<a href="https://docs.google.com/forms/d/e/1FAIpQLSccYvgF1qphMvVYDCCjVI34up_VGGoFdpbsDjJG67wLP643HQ/viewform?usp=sf_link" target="_blank">意見・バグ報告はこちら</a>
 			<a href="../index.html">LEAP問題集 へ</a>
 		</ul>
+	</div>
+
+	<div id="debug" style="background-color: #3c3cc5; width: 1000px; margin: 0 auto; color: white;">
+		<h2 style="padding: 5px 0 0 20px;margin: 10px 0 5px 0;">修正・追加</h2>
+		<table id="debug_table" border="1" bordercolor="#dcdcdc" style="margin: 0 10px 10px 10px;">
+			<tr>
+				<th>日付</th>
+				<th>内容</th>
+				<th>備考</th>
+			</tr>
+			<tr>
+				<td><nobr>2023/12/28</nobr></td>
+				<td><nobr>checkシステム導入</nobr></td>
+				<td>自分のわからない単語が重点的に復習できるようになりました。</td>
+			</tr>
+		</table>
 	</div>
 </body>
 
