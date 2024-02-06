@@ -394,6 +394,8 @@ function make_question_ALL(type){
         //no ch のみ出力する場合
         if(document.getElementsByName("no_check_checkbox")[0].checked == true){
             console.log("no checkのみ")
+            //個別の回答を作成するときに持たせる行番号を個別で指定
+            var j = 0
             //挿入するテーブルの中身取得
             for(var i=0; i<rangenum_rear -rangenum_front +1; i++){
                 // 単語番号
@@ -417,17 +419,21 @@ function make_question_ALL(type){
                     var cellElem_1 = trElem.insertCell(0).innerHTML = i+1;
                     var cellElem_2 = trElem.insertCell(1).innerHTML = word_num;
                     var cellElem_3 = trElem.insertCell(2).innerHTML = word_question;
-                    var cellElem_4 = trElem.insertCell(3).innerHTML = '<button class="all_displayButton" onclick="make_answer_specific('+i+')"><nobr>表示</nobr></button>';
+                    var cellElem_4 = trElem.insertCell(3).innerHTML = '<button class="all_displayButton" onclick="make_answer_specific('+j+')"><nobr>表示</nobr></button>';
                     var cellElem_5 = trElem.insertCell(4).setAttribute("class","all_answer");
                     //checkボタンを決める
                     if(check_li[word_num-1]==0){
-                        var cellElem_6 = trElem.insertCell(5).innerHTML = '<button class="check_button" onclick="change_check('+(word_num-1)+','+i+')">no ch</button>';
+                        var cellElem_6 = trElem.insertCell(5).innerHTML = '<button class="check_button" onclick="change_check('+(word_num-1)+','+j+')">no ch</button>';
                     }else{
-                        var cellElem_6 = trElem.insertCell(5).innerHTML = '<button class="check_button checked" onclick="change_check('+(word_num-1)+','+i+')">checked</button>';
+                        var cellElem_6 = trElem.insertCell(5).innerHTML = '<button class="check_button checked" onclick="change_check('+(word_num-1)+','+j+')">checked</button>';
                     }
+                    
+                    j = j+1
                 }
             }
         }else{ //それぞれの行を作成
+            //個別の回答を作成するときに持たせる行番号を個別で指定
+            var j = 0
             //挿入するテーブルの中身取得
             for(var i=0; i<rangenum_rear -rangenum_front +1; i++){
                 // tbody要素にtr要素（行）を最後に追加
@@ -451,14 +457,15 @@ function make_question_ALL(type){
                 var cellElem_1 = trElem.insertCell(0).innerHTML = i+1;
                 var cellElem_2 = trElem.insertCell(1).innerHTML = word_num;
                 var cellElem_3 = trElem.insertCell(2).innerHTML = word_question;
-                var cellElem_4 = trElem.insertCell(3).innerHTML = '<button class="all_displayButton" onclick="make_answer_specific('+i+')"><nobr>表示</nobr></button>';
+                var cellElem_4 = trElem.insertCell(3).innerHTML = '<button class="all_displayButton" onclick="make_answer_specific('+j+')"><nobr>表示</nobr></button>';
                 var cellElem_5 = trElem.insertCell(4).setAttribute("class","all_answer");
                 //checkボタンを決める
                 if(check_li[word_num-1]==0){
-                    var cellElem_6 = trElem.insertCell(5).innerHTML = '<button class="check_button" onclick="change_check('+(word_num-1)+','+i+')">no ch</button>';
+                    var cellElem_6 = trElem.insertCell(5).innerHTML = '<button class="check_button" onclick="change_check('+(word_num-1)+','+j+')">no ch</button>';
                 }else{
-                    var cellElem_6 = trElem.insertCell(5).innerHTML = '<button class="check_button checked" onclick="change_check('+(word_num-1)+','+i+')">checked</button>';
+                    var cellElem_6 = trElem.insertCell(5).innerHTML = '<button class="check_button checked" onclick="change_check('+(word_num-1)+','+j+')">checked</button>';
                 }
+                j = j+1
             }
         }
 
