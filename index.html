@@ -24,6 +24,7 @@
     <div id="tempWord_EJ" style="display: none;"></div>
 	<div id="tempWord_JE" style="display: none;"></div>
 	<div id="tempWord_ALL" style="display: none;"></div>
+	<div id="words_num" style="display: none;"></div>
     <div id="setpage" style="display: none;">many</div>
 
 	<div class="main" id="E-J" style="display: none;">
@@ -250,21 +251,35 @@
 					指定した範囲内の単語の問題を順番に作成します。(英語→日本語)
 				</h1>
 				
-				<button class="button" id="many_make_button" onclick="make_question_ALL('E-J')">問題作成<br>(英語→日本語)</button>
-				<button class="button" id="many_make_button" onclick="make_question_ALL('J-E')">問題作成<br>(日本語→英語)</button>
-				<button class="button" id="many_answer_button" onclick="make_answer_ALL()">回答を表示</button>
-				<label><input type="checkbox" name="many_random_checkbox" checked="true" style="transform: scale(1.4);"> 問題を並びかえる(未実装)</label>
-
+				<div style="display: flex;">
+					<div><button class="button" id="many_make_button" onclick="make_question_ALL('E-J')">問題作成<br>(英語→日本語)</button></div>
+					<div><button class="button" id="many_make_button" onclick="make_question_ALL('J-E')">問題作成<br>(日本語→英語)</button></div>
+					<div><button class="button" id="many_answer_button" onclick="make_answer_ALL()">回答を表示</button></div>
+					<ul style="list-style: none;">
+						<li><label><input type="checkbox" name="many_random_checkbox" checked="true" style="transform: scale(1.4);"> 問題を並びかえる(未実装)</label></li>
+						<li><label><input type="checkbox" name="no_check_checkbox" style="transform: scale(1.4);" > no check のみ表示</label></li>
+					</ul>
+				</div>
+				
 				<div class="range" style="align-items: flex-end;">
 					<a>範囲指定:</a>
 					<input type="number" id="all_rangenum_front">
 					<a>～</a>
 					<input type="number" id="all_rangenum_rear">
-					<div>
-						<label><input type="checkbox" name="rec_range" checked="true" style="transform: scale(1.4); margin: 0 10px 0 30px;">範囲を記録</label>
-						<a style="font-size: 13px;">※ブラウザを再起動すると記録は初期化されます。ページの更新では消えません。</a>
-						
+					<a style="font-size: 15px;margin: auto 0 0 10px;">※省略場合は全てを参照します</a>
 					</div>
+					<div id="words_point" style="margin: auto 0 0 20px;" border="1">
+						現在のcheck数
+						<span id="points" style="color: rgb(87, 0, 0);font-weight: bold;font-size: 20px;">0</span>
+						/
+						<span id="points_mother">未読込</span>
+						個
+						<button class="button" name="clear_check" onclick="clear_check()" style="margin: 0 0 0 7px;font-size: 12px;background-color: #be1d01;">check初期化</button>
+						<button class="button" name="clear_check" onclick="copy_check()" style="margin: 0 0 0 7px;font-size: 12px;background-color: #e0ee16;color: black;">checkコピー</button>
+					</div>
+					
+				</div>
+				<div style="margin: 10px;border: 2px dashed #FF0000;width: 500px;padding: 3px;display: none;" id="copybox">こちらの文章を貼り付けてください。<input id="copyTarget" type="text" value="！エラー！" readonly></div>
 					
 				</div>
 
@@ -276,6 +291,7 @@
 							<th>問題</th>
 							<th>答え<br><nobr>表示</nobr></th>
 							<th>答え</th>
+							<th>check</th>
 						</tr>
 					</table>
 				</div>
@@ -10002,5 +10018,8 @@
 		</table>
 	</div>
 </body>
-
+<script>
+	start()
+</script>
 </html>
+
