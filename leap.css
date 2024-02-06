@@ -94,6 +94,22 @@
     transform: translateY(-4px);
 }
 
+.check_button {
+    font-weight: 500;
+    font-size: 15px;
+    padding: 3px 8px;
+    margin: 5px 1px 1px 1px;
+    color: #ffffff;
+    background-color: #005892;
+    border-radius: 2vh;
+    box-shadow: 0 4px 2px #6e5307;
+    transform: translateY(-4px);
+}
+
+.checked {
+    background-color: #ac2a02;
+}
+
 .make_button:hover {
     background-color: #05683d;
 }
