@@ -602,9 +602,9 @@ function clear_check() {
 
 function copy_check() {
     var data = JSON.parse(localStorage.getItem("check_list_leap"));
-    var data_bace32 = change_bace2_to_32(data);
+    var data_bace64 = change_bace2_to_64(data);
 
-    document.getElementById("copyTarget").value = data_bace32
+    document.getElementById("copyTarget").value = data_bace64
     document.getElementById("copybox").style.display = "";
 
     // コピー対象のテキストを選択する
@@ -616,12 +616,41 @@ function copy_check() {
     alert("コピーしました。こちらの文章を他端末に貼り付けることで、checkを共有できます。")
 }
 
-function change_bace2_to_32(data) {  //受け取り:配列 返し:文字列
+function appear_check() {
+    document.getElementById("inputbox").style.display = "";
+}
+
+function input_check() {
+    //確認
+    var result = confirm("この端末の記録は削除され、新たに入力されたcheckが適応されます。その後、反映のためサイトを再読み込みさせます。それでもよろしいですか？")
+    if(result){
+        //入力されてる文字の内容取得
+        var input_deta = document.getElementById("input_Target").value
+        //配列に変換
+        var array = change_bace64_to_2(input_deta)
+        console.log("aa",array[0])
+        //check数の計算
+        var num = 0
+        for(var i=0; i<array[0].length; i++){
+            num = num + Number(array[0][i])
+        }
+        //更新
+        localStorage.setItem("check_list_leap", JSON.stringify(array[0]))
+        localStorage.setItem("check_num_leap", num)
+        //再読み込み
+        location.reload(true);
+    }
+    
+
+}
+
+function change_bace2_to_64(data) {  //引数:配列 返り値:文字列
     //ビット数を変更する際は、comp_text の数を 2^bit に変更すること。
     //var data = [0,0,0,0,0,0,0,0,0,0,0,0]
     console.log("aaa")
-    var bit_num = 5
-    var comp_text = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6']
+    var bit_num = 6
+    var comp_text = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F'
+                    ,'G', 'H', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '#', '%', '&', '*']
     var result = ""
     for(var i=0; i<Math.ceil(data.length/bit_num); i++){
         var text = ""
@@ -638,16 +667,17 @@ function change_bace2_to_32(data) {  //受け取り:配列 返し:文字列
     result = result + comp_text[parseInt(text,2)]
     }
     result = result + "/" + data.length
-    console.log("bace 2 to 32 result :",result);
+    console.log("bace 2 to 64 result :",result);
     return result
 }
 
-function change_bace32_to_2(data) {  //受け取り:文字列 返し:配列
+function change_bace64_to_2(data) {  //引数:文字列 返り値:配列 [2進数配列, 数]
     //ビット数を変更する際は、comp_text の数を 2^bit に変更すること。
     //var data = "5b/8"
-    var bit_num = 5
+    var bit_num = 6
     var data_ary = data.split("/")
-    var comp_text = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6']
+    var comp_text = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F'
+                    ,'G', 'H', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '#', '%', '&', '*']
     var text = ""
     for(var i=0; i<data_ary[0].length; i++){
         var for_text = comp_text.indexOf(data[i]).toString(2)
@@ -667,8 +697,8 @@ function change_bace32_to_2(data) {  //受け取り:文字列 返し:配列
         }
         text = text + for_text
     }
-    console.log("bace 32 to 2 result :",text.split(""));
-    return text.split("")
+    console.log("bace 64 to 2 result :",text.split(""));
+    return [text.split("").map(Number), data_ary[1]]
 }
 
 document.addEventListener('keypress', keypress_ivent);
