@@ -256,7 +256,7 @@
 					<div><button class="button" id="many_make_button" onclick="make_question_ALL('J-E')">問題作成<br>(日本語→英語)</button></div>
 					<div><button class="button" id="many_answer_button" onclick="make_answer_ALL()">回答を表示</button></div>
 					<ul style="list-style: none;">
-						<li><label><input type="checkbox" name="many_random_checkbox" checked="true" style="transform: scale(1.4);"> 問題を並びかえる(未実装)</label></li>
+						<li><label><input type="checkbox" name="many_random_checkbox" checked="true" style="transform: scale(1.4);"> 問題を並びかえる</label></li>
 						<li><label><input type="checkbox" name="no_check_checkbox" style="transform: scale(1.4);" > no check のみ表示</label></li>
 					</ul>
 				</div>
@@ -276,11 +276,21 @@
 						個
 						<button class="button" name="clear_check" onclick="clear_check()" style="margin: 0 0 0 7px;font-size: 12px;background-color: #be1d01;">check初期化</button>
 						<button class="button" name="clear_check" onclick="copy_check()" style="margin: 0 0 0 7px;font-size: 12px;background-color: #e0ee16;color: black;">checkコピー</button>
+						<button class="button" name="clear_check" onclick="appear_check()" style="margin: 0 0 0 7px;font-size: 12px;background-color: #58e6ff;color: black;">check入力</button>
 					</div>
 					
 				</div>
-				<div style="margin: 10px;border: 2px dashed #FF0000;width: 500px;padding: 3px;display: none;" id="copybox">こちらの文章を貼り付けてください。<input id="copyTarget" type="text" value="！エラー！" readonly></div>
-					
+				<div style="margin: 10px;border: 2px dashed #FF0000;width: 950px;padding: 3px;margin: 5px auto;display: none;" id="copybox">
+					こちらの文字列を貼り付けてください。
+					<input id="copyTarget" type="text" value="！エラー！" readonly style="width: 645px;">
+				</div>
+				<div style="margin: 10px;border: 2px dashed #00d9ff;width: 950px;padding: 3px;margin: 5px auto;display: none;" id="inputbox">
+					こちらに文字列を入力してください。
+					<button class="button" name="clear_check" onclick="input_check()" style="margin: 3px 6px 0 0;font-size: 12px;background-color: #58e6ff;color: black;">入力じゃ！</button>
+					<input id="input_Target" type="text" placeholder="ここに入力" style="width: 564px;">
+				</div>
+
+				
 				</div>
 
 				<div class="tablelist" id="all_table_origin">
@@ -10016,14 +10026,19 @@
 				<td>1363 scold の意味が「～を？？る」になってたので「～を叱る」に変更しました。<br>報告ありがとうございます。</td>
 			</tr>
 			<tr>
-				<td><nobr>2024/1/7</nobr></td>
+				<td><nobr>2024/2/7</nobr></td>
 				<td><nobr>checkシステム導入</nobr></td>
 				<td>自分のわからない単語が重点的に復習できるようになりました。</td>
 			</tr>
 			<tr>
-				<td><nobr>2024/1/7</nobr></td>
+				<td><nobr>2024/2/7</nobr></td>
 				<td><nobr>バグ解消</nobr></td>
 				<td>回答作成がずれるバグを解消しました。</td>
+			</tr>
+			<tr>
+				<td><nobr>2024/2/15</nobr></td>
+				<td><nobr>checkのインポート機能実装</nobr></td>
+				<td>他の端末とcheckを共有できます。</td>
 			</tr>
 		</table>
 	</div>
